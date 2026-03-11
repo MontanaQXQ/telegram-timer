@@ -1,15 +1,25 @@
 import json
+import os
 from datetime import datetime
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = "8745372506:AAFZIAoF_yLH-thqbcNlchxhFDjY7UaNfv8"
+
+
+TOKEN = os.getenv("BOT_TOKEN")
+
+if not TOKEN:
+    raise ValueError("BOT_TOKEN не найден в переменных окружения")
+    
 WEBAPP_URL = "https://montanaqxq.github.io/telegram-timer/?v=2"
 
 
 def load_config():
-    with open("config.json") as f:
-        return json.load(f)
+    try:
+        with open("config.json") as f:
+            return json.load(f)
+    except:
+        return {"target": "2026-04-30 19:00"}
 
 
 def save_config(data):
