@@ -1,101 +1,142 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Timer</title>
+<meta charset="UTF-8">
+<title>Timer</title>
 
-    <style>
+<style>
 
-        body{
-        background:#0f172a;
-        color:white;
-        font-family:Arial;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-        }
+body{
+background:linear-gradient(180deg,#07132b,#020617);
+color:white;
+font-family:Arial, Helvetica, sans-serif;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
 
-        .timer{
-        font-size:70px;
-        font-weight:bold;
-        display:flex;
-        gap:20px;
-        }
+.title{
+font-size:28px;
+opacity:0.8;
+margin-bottom:40px;
+}
 
-        .block{
-        text-align:center;
-        }
+.timer{
+display:flex;
+gap:30px;
+}
 
-        .label{
-        font-size:14px;
-        opacity:0.7;
-        }
+.block{
+text-align:center;
+}
 
-    </style>
+.number{
+font-size:72px;
+font-weight:700;
+transition:all 0.3s ease;
+}
+
+.label{
+font-size:14px;
+opacity:0.6;
+letter-spacing:1px;
+margin-top:5px;
+}
+
+.bar{
+width:80%;
+height:8px;
+background:#0f172a;
+border-radius:10px;
+margin-top:50px;
+overflow:hidden;
+}
+
+.progress{
+height:100%;
+background:linear-gradient(90deg,#6366f1,#22c55e);
+width:0%;
+transition:width 1s linear;
+}
+
+</style>
 
 </head>
 
 <body>
 
-<h2>Countdown</h2>
+<div class="title">Countdown</div>
 
 <div class="timer">
 
-    <div class="block">
-        <div id="days">0</div>
-        <div class="label">days</div>
-    </div>
+<div class="block">
+<div class="number" id="days">0</div>
+<div class="label">DAYS</div>
+</div>
 
-    <div class="block">
-        <div id="hours">0</div>
-        <div class="label">hours</div>
-    </div>
+<div class="block">
+<div class="number" id="hours">0</div>
+<div class="label">HOURS</div>
+</div>
 
-    <div class="block">
-        <div id="minutes">0</div>
-        <div class="label">minutes</div>
-    </div>
+<div class="block">
+<div class="number" id="minutes">0</div>
+<div class="label">MINUTES</div>
+</div>
 
-    <div class="block">
-        <div id="seconds">0</div>
-        <div class="label">seconds</div>
-    </div>
+<div class="block">
+<div class="number" id="seconds">0</div>
+<div class="label">SECONDS</div>
+</div>
 
 </div>
 
+<div class="bar">
+<div class="progress" id="progress"></div>
+</div>
 
 <script>
 
-    const target = new Date("2026-04-30T19:00:00")
+const target = new Date("2026-04-30T19:00:00")
 
-    function update(){
+const start = new Date()
 
-    const now = new Date()
+function update(){
 
-    const diff = target - now
+const now = new Date()
 
-    if(diff <= 0){
-    document.body.innerHTML="<h1>TIME!</h1>"
-    return
-    }
+const diff = target - now
 
-    const days = Math.floor(diff / (1000*60*60*24))
-    const hours = Math.floor(diff / (1000*60*60) % 24)
-    const minutes = Math.floor(diff / (1000*60) % 60)
-    const seconds = Math.floor(diff / 1000 % 60)
+if(diff <= 0){
+document.body.innerHTML="<h1>TIME!</h1>"
+return
+}
 
-    document.getElementById("days").innerText = days
-    document.getElementById("hours").innerText = hours
-    document.getElementById("minutes").innerText = minutes
-    document.getElementById("seconds").innerText = seconds
+const days = Math.floor(diff / (1000*60*60*24))
+const hours = Math.floor(diff / (1000*60*60) % 24)
+const minutes = Math.floor(diff / (1000*60) % 60)
+const seconds = Math.floor(diff / 1000 % 60)
 
-    }
+document.getElementById("days").innerText = days
+document.getElementById("hours").innerText = hours
+document.getElementById("minutes").innerText = minutes
+document.getElementById("seconds").innerText = seconds
 
-    setInterval(update,1000)
+const total = target - start
+const passed = now - start
 
-    update()
+const percent = (passed / total) * 100
+
+document.getElementById("progress").style.width = percent + "%"
+
+}
+
+setInterval(update,1000)
+
+update()
 
 </script>
 
