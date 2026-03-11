@@ -7,41 +7,37 @@
 <style>
 
 body{
-margin:0;
-height:100vh;
+background:#020617;
+color:white;
+font-family:Arial;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background:#020617;
-font-family:monospace;
-color:#24e6ea;
-overflow:hidden;
+height:100vh;
+margin:0;
 }
 
 /* контейнер таймера */
+
 .timer{
+font-size:clamp(40px,12vw,70px);
+font-weight:bold;
 display:flex;
-justify-content:center;
-align-items:center;
-width:100%;
-font-size:clamp(28px,10vw,52px);
+gap:clamp(10px,4vw,20px);
 text-shadow:
-0 0 3px rgba(0,255,255,0.6),
-0 0 6px rgba(0,255,255,0.3);
+0 0 6px rgba(0,255,255,0.6),
+0 0 12px rgba(0,255,255,0.3);
 }
 
-/* подписи */
-.labels{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-width:80%;
-max-width:400px;
-margin-top:8px;
+.block{
 text-align:center;
-font-size:11px;
+}
+
+.label{
+font-size:12px;
 opacity:0.7;
-color:#bbb;
+margin-top:4px;
 }
 
 </style>
@@ -50,24 +46,33 @@ color:#bbb;
 
 <body>
 
-<div class="timer" id="timer">
-00:00:00:00
+<div class="timer">
+
+<div class="block">
+<div id="days">0</div>
+<div class="label">Д</div>
 </div>
 
-<div class="labels">
-<div>Д</div>
-<div>Ч</div>
-<div>М</div>
-<div>С</div>
+<div class="block">
+<div id="hours">0</div>
+<div class="label">Ч</div>
+</div>
+
+<div class="block">
+<div id="minutes">0</div>
+<div class="label">М</div>
+</div>
+
+<div class="block">
+<div id="seconds">0</div>
+<div class="label">С</div>
+</div>
+
 </div>
 
 <script>
 
 const target = new Date("2026-04-30T19:00:00")
-
-function pad(num){
-return String(num).padStart(2,'0')
-}
 
 function update(){
 
@@ -75,7 +80,7 @@ const now = new Date()
 const diff = target - now
 
 if(diff <= 0){
-document.getElementById("timer").innerText = "00:00:00:00"
+document.body.innerHTML="<h1>Время!</h1>"
 return
 }
 
@@ -84,8 +89,10 @@ const hours = Math.floor(diff / (1000*60*60) % 24)
 const minutes = Math.floor(diff / (1000*60) % 60)
 const seconds = Math.floor(diff / 1000 % 60)
 
-document.getElementById("timer").innerText =
-days + ":" + pad(hours) + ":" + pad(minutes) + ":" + pad(seconds)
+document.getElementById("days").innerText = days
+document.getElementById("hours").innerText = hours
+document.getElementById("minutes").innerText = minutes
+document.getElementById("seconds").innerText = seconds
 
 }
 
