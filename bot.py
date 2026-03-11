@@ -146,4 +146,12 @@ async def error_handler(update, context):
 
 app.add_error_handler(error_handler)
 
-app.run_polling()
+app.add_error_handler(error_handler)
+
+import asyncio
+
+async def main():
+    await app.run_polling()
+
+if __name__ == "__main__":
+    asyncio.run(main())
