@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Timer</title>
+
+    <style>
+
+        body{
+        background:#0f172a;
+        color:white;
+        font-family:Arial;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        }
+
+        .timer{
+        font-size:70px;
+        font-weight:bold;
+        display:flex;
+        gap:20px;
+        }
+
+        .block{
+        text-align:center;
+        }
+
+        .label{
+        font-size:14px;
+        opacity:0.7;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h2>Countdown</h2>
+
+<div class="timer">
+
+    <div class="block">
+        <div id="days">0</div>
+        <div class="label">days</div>
+    </div>
+
+    <div class="block">
+        <div id="hours">0</div>
+        <div class="label">hours</div>
+    </div>
+
+    <div class="block">
+        <div id="minutes">0</div>
+        <div class="label">minutes</div>
+    </div>
+
+    <div class="block">
+        <div id="seconds">0</div>
+        <div class="label">seconds</div>
+    </div>
+
+</div>
+
+
+<script>
+
+    const target = new Date("2026-04-30T19:00:00")
+
+    function update(){
+
+    const now = new Date()
+
+    const diff = target - now
+
+    if(diff <= 0){
+    document.body.innerHTML="<h1>TIME!</h1>"
+    return
+    }
+
+    const days = Math.floor(diff / (1000*60*60*24))
+    const hours = Math.floor(diff / (1000*60*60) % 24)
+    const minutes = Math.floor(diff / (1000*60) % 60)
+    const seconds = Math.floor(diff / 1000 % 60)
+
+    document.getElementById("days").innerText = days
+    document.getElementById("hours").innerText = hours
+    document.getElementById("minutes").innerText = minutes
+    document.getElementById("seconds").innerText = seconds
+
+    }
+
+    setInterval(update,1000)
+
+    update()
+
+</script>
+
+</body>
+</html>
