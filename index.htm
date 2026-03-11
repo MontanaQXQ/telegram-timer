@@ -15,27 +15,33 @@ justify-content:center;
 align-items:center;
 background:#020617;
 font-family:monospace;
-color:#21d4d9;
+color:#24e6ea;
+overflow:hidden;
 }
 
-/* основной таймер */
+/* контейнер таймера */
 .timer{
-font-size:clamp(32px, 12vw, 64px);
-letter-spacing:2px;
+display:flex;
+justify-content:center;
+align-items:center;
+width:100%;
+font-size:clamp(28px,10vw,52px);
 text-shadow:
-0 0 4px rgba(0,255,255,0.6),
-0 0 8px rgba(0,255,255,0.4);
-transition:all 0.2s;
+0 0 3px rgba(0,255,255,0.6),
+0 0 6px rgba(0,255,255,0.3);
 }
 
 /* подписи */
 .labels{
-display:flex;
-gap:clamp(18px,6vw,40px);
+display:grid;
+grid-template-columns:repeat(4,1fr);
+width:80%;
+max-width:400px;
 margin-top:8px;
-font-size:12px;
+text-align:center;
+font-size:11px;
 opacity:0.7;
-color:#ccc;
+color:#bbb;
 }
 
 </style>
@@ -49,10 +55,10 @@ color:#ccc;
 </div>
 
 <div class="labels">
-<span>Д</span>
-<span>Ч</span>
-<span>М</span>
-<span>С</span>
+<div>Д</div>
+<div>Ч</div>
+<div>М</div>
+<div>С</div>
 </div>
 
 <script>
